@@ -24,7 +24,7 @@ If treated numerically, the model may evaluate splits like “zipCode > 50012.5,
 
 ---
 
-## Numerical Encoding ModelS
+## Numerical Encoding Model
 
 ```{python}
 # Load libraries
@@ -40,9 +40,11 @@ warnings.filterwarnings('ignore')
 sales_data = pd.read_csv("salesPriceData.csv")
 
 # Select variables
-model_vars = ['SalePrice', 'LotArea', 'YearBuilt', 'GrLivArea',
-              'FullBath', 'HalfBath', 'BedroomAbvGr',
-              'TotRmsAbvGrd', 'GarageCars', 'zipCode']
+model_vars = [
+    'SalePrice', 'LotArea', 'YearBuilt', 'GrLivArea',
+    'FullBath', 'HalfBath', 'BedroomAbvGr',
+    'TotRmsAbvGrd', 'GarageCars', 'zipCode'
+]
 
 model_data = sales_data[model_vars].dropna()
 
@@ -51,10 +53,12 @@ X = model_data.drop('SalePrice', axis=1)
 y = model_data['SalePrice']
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=123
+    X, y,
+    test_size=0.2,
+    random_state=123
 )
 
-# Train decision tree (numerical zipCode)
+# Train model (IMPORTANT: no output from this line)
 tree_model = DecisionTreeRegressor(
     max_depth=3,
     min_samples_split=20,
