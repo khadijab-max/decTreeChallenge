@@ -24,7 +24,7 @@ If treated numerically, the model may evaluate splits like “zipCode > 50012.5,
 
 ---
 
-## Numerical Encoding Model
+## Numerical Encoding ModelS
 
 ```{python}
 # Load libraries
@@ -89,13 +89,13 @@ importance_df
 ```
  
 
-## Numerical Encoding Problem (Analysis)
+## Numerical Encoding Model (zipCode as Numeric)
 
 In the numerical model, zipCode is treated as a continuous variable. This leads to meaningless splits such as threshold comparisons between zip codes, which do not reflect real-world relationships.
 
 As a result, the model either underestimates or misinterprets the importance of zipCode. Even when zipCode is important for predicting house prices, the encoding prevents the decision tree from capturing its true effect. This highlights how improper encoding can distort feature importance results.
 
-## Categorical Encoding Model (One-Hot Encoding)
+## Categorical Encoding Model (One-Hot Encoding Applied)
 
 ```{python}
 # One-hot encode zipCode
@@ -149,7 +149,7 @@ importance_cat
 
 ## One-Hot Encoding Solution (Analysis)
 
-When zipCode is one-hot encoded, the model can evaluate each geographic area independently. This allows the decision tree to identify specific zip codes that have a strong relationship with housing prices.
+When zipCode is one-hot encoded, the model can evaluate each geographic area independently. However, in this model, zipCode still does not appear as an important predictor. This suggests that either other variables dominate prediction or the tree depth is too limited to capture location effects. This highlights an important point: proper encoding is necessary, but not sufficient. Model structure and feature competition also influence whether a variable appears important. 
 
 Unlike numerical encoding, this approach preserves the categorical nature of the variable and results in more meaningful splits. It improves interpretability and ensures that location effects are correctly captured in feature importance.
 
@@ -165,8 +165,7 @@ When encoded numerically, the decision tree imposes artificial order and evaluat
 
 2. **R vs Python Implementation Analysis:** 
 
-
-A key limitation of :contentReference[oaicite:0]{index=0} is that it does not natively support categorical variables in decision trees. Instead, all inputs must be numerical, which forces users to encode categories manually.
+A key limitation of scikit-learn is that it does not natively support categorical variables in decision trees. Instead, all inputs must be numerical, which forces users to encode categories manually.
 
 According to the documentation:
 > “Decision trees in scikit-learn do not support categorical variables directly.”
